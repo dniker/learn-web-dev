@@ -47,13 +47,161 @@
 //
 // Ниже — пустой каркас. Здесь можно начать писать.
 
-function App() {
+import { useState, useEffect } from 'react';
+import Header from './components/Header';
+import Stepper from './components/Stepper';
+import Calendar from './components/Calendar';
+import TimeSlots from './components/TimeSlots';
+import SummaryBar from './components/SummaryBar';
+import Footer from './components/Footer';
+import { fetchToday, fetchSlots } from './api';
+
+export default function App() {
+  const [today, setToday] = useState(null);
+  const [todayLoading, setTodayLoading] = useState(true);
+  const [todayError, setTodayError] = useState(null);
+
+  const [viewYear, setViewYear] = useState(2026);
+  const [viewMonth, setViewMonth] = useState(9);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+
+  const [slots, setSlots] = useState([]);
+  const [slotsLoading, setSlotsLoading] = useState(false);
+  const [slotsError, setSlotsError] = useState(null);
+
+  useEffect(() => {
+    async function loadToday() {
+      try {
+        setTodayLoading(true);
+        setTodayError(null);
+        const data = await fetchToday();
+        setToday(data);
+        setViewYear(data.year);
+        setViewMonth(data.month);
+        setSelectedDate(data);
+      } catch (err) {
+        setTodayError(err.message || 'Не удалось получить текущую дату с сервера');
+      } finally {
+        setTodayLoading(false);
+      }
+    }
+
+    loadToday();
+  }, []);
+
+  useEffect(() => {
+    if (!selectedDate) return;
+
+    async function loadSlots() {
+      try {
+        setSlotsLoading(true);
+        setSlotsError(null);
+        const data = await fetchSlots(selectedDate);
+        setSlots(data.slots || []);
+      } catch (err) {
+        setSlotsError(err.message || 'Не удалось загрузить слоты');
+        setSlots([]);
+      } finally {
+        setSlotsLoading(false);
+      }
+    }
+
+    loadSlots();
+  }, [selectedDate]);
+
+  function handleSelectDay(day) {
+    setSelectedDate({ year: viewYear, month: viewMonth, day });
+    setSelectedTime(null);
+  }
+
+  function handlePrevMonth() {
+    if (viewMonth === 0) {
+      setViewMonth(11);
+      setViewYear((prev) => prev - 1);
+    } else {
+      setViewMonth((prev) => prev - 1);
+    }
+  }
+
+  function handleNextMonth() {
+    if (viewMonth === 11) {
+      setViewMonth(0);
+      setViewYear((prev) => prev + 1);
+    } else {
+      setViewMonth((prev) => prev + 1);
+    }
+  }
+
   return (
-    <div>
-      {/* Начните отсюда. Например, разметьте .page, добавьте шапку,
-            основную область, подвал. */}
+    <div className="page">
+      <Header />
+      <Stepper />
+
+      <main className="main-content">
+        <div className="container">
+          <section className="booking-top">
+            <div className="booking-heading">
+              <h1 className="page-title">ЗАПИСЬ</h1>
+              <p className="page-subtitle">Выберите дату и время</p>
+            </div>
+
+            <div className="selected-service-card">
+              <div className="service-card-left">
+                <span className="service-checkbox">✓</span>
+                <div className="service-info">
+                  <h2 className="service-name">Тонирование и блеск</h2>
+                  <p className="service-duration">Длительность: 90 мин</p>
+                </div>
+              </div>
+              <span className="service-price">4 500 ₽</span>
+            </div>
+          </section>
+
+          {todayLoading && (
+            <div className="status-message">Загрузка календаря…</div>
+          )}
+
+          {!todayLoading && todayError && (
+            <div className="status-message error">
+              Ошибка загрузки календаря: {todayError}
+            </div>
+          )}
+
+          {!todayLoading && !todayError && (
+            <>
+              <section className="booking-grid">
+                <Calendar
+                  today={today}
+                  viewYear={viewYear}
+                  viewMonth={viewMonth}
+                  selectedDate={selectedDate}
+                  onSelectDay={handleSelectDay}
+                  onPrevMonth={handlePrevMonth}
+                  onNextMonth={handleNextMonth}
+                />
+
+                <TimeSlots
+                  selectedDate={selectedDate}
+                  slots={slots}
+                  loading={slotsLoading}
+                  error={slotsError}
+                  selectedTime={selectedTime}
+                  onSelectTime={setSelectedTime}
+                />
+              </section>
+
+              <SummaryBar
+                selectedDate={selectedDate}
+                selectedTime={selectedTime}
+              />
+            </>
+          )}
+        </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }
 
-export default App;
