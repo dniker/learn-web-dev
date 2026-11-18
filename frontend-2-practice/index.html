@@ -1,14 +1,220 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Выбор даты и времени</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="page">
-      <!-- Перенесите вашу верстку. Удалите статичные данные. Подключите скрипт -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>КОНТУР — Выбор даты и времени</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page">
+
+
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">КОНТУР</a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#" class="nav-link">Услуги</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Галерея</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Команда</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Отзывы</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Контакты</a></li>
+        </ul>
+      </nav>
     </div>
-  </body>
+  </header>
+
+  
+  <section class="stepper-section">
+    <div class="container">
+      <ol class="stepper-list">
+        <li class="step-item completed">
+          <span class="step-circle">✓</span>
+          <span class="step-label">Мастер</span>
+        </li>
+        <li class="step-line completed"></li>
+        <li class="step-item completed">
+          <span class="step-circle">✓</span>
+          <span class="step-label">Услуга</span>
+        </li>
+        <li class="step-line completed"></li>
+        <li class="step-item active">
+          <span class="step-circle">3</span>
+          <span class="step-label">Дата и время</span>
+        </li>
+        <li class="step-line"></li>
+        <li class="step-item">
+          <span class="step-circle">4</span>
+          <span class="step-label">Контакты</span>
+        </li>
+        <li class="step-line"></li>
+        <li class="step-item">
+          <span class="step-circle">5</span>
+          <span class="step-label">Подтверждение</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  
+  <main class="main-content">
+    <div class="container">
+
+      
+      <section class="booking-top">
+        <div class="booking-heading">
+          <h1 class="page-title">ЗАПИСЬ</h1>
+          <p class="page-subtitle">Выберите дату и время</p>
+        </div>
+
+        <div class="selected-service-card">
+          <div class="service-card-left">
+            <span class="service-checkbox">✓</span>
+            <div class="service-info">
+              <h2 class="service-name">Тонирование и блеск</h2>
+              <p class="service-duration">Длительность: 90 мин</p>
+            </div>
+          </div>
+          <span class="service-price">4 500 ₽</span>
+        </div>
+      </section>
+
+      
+      <section class="booking-grid">
+
+        
+        <div class="card-box calendar-box">
+          <div class="calendar-header">
+            <h2 class="box-title">Октябрь 2026</h2>
+            <div class="calendar-nav">
+              <button type="button" class="month-btn" aria-label="Предыдущий месяц">‹</button>
+              <button type="button" class="month-btn" aria-label="Следующий месяц">›</button>
+            </div>
+          </div>
+
+          <div class="weekdays-grid">
+            <span class="weekday">Пн</span>
+            <span class="weekday">Вт</span>
+            <span class="weekday">Ср</span>
+            <span class="weekday">Чт</span>
+            <span class="weekday">Пт</span>
+            <span class="weekday">Сб</span>
+            <span class="weekday">Вс</span>
+          </div>
+
+          <div class="days-grid">
+            <button type="button" class="day-cell other-month">28</button>
+            <button type="button" class="day-cell other-month">29</button>
+            <button type="button" class="day-cell other-month">30</button>
+            <button type="button" class="day-cell">1</button>
+            <button type="button" class="day-cell">2</button>
+            <button type="button" class="day-cell">3</button>
+            <button type="button" class="day-cell">4</button>
+
+            <button type="button" class="day-cell">5</button>
+            <button type="button" class="day-cell today">6</button>
+            <button type="button" class="day-cell">7</button>
+            <button type="button" class="day-cell">8</button>
+            <button type="button" class="day-cell">9</button>
+            <button type="button" class="day-cell">10</button>
+            <button type="button" class="day-cell">11</button>
+
+            <button type="button" class="day-cell">12</button>
+            <button type="button" class="day-cell">13</button>
+            <button type="button" class="day-cell">14</button>
+            <button type="button" class="day-cell selected">15</button>
+            <button type="button" class="day-cell">16</button>
+            <button type="button" class="day-cell">17</button>
+            <button type="button" class="day-cell">18</button>
+
+            <button type="button" class="day-cell">19</button>
+            <button type="button" class="day-cell">20</button>
+            <button type="button" class="day-cell">21</button>
+            <button type="button" class="day-cell">22</button>
+            <button type="button" class="day-cell">23</button>
+            <button type="button" class="day-cell">24</button>
+            <button type="button" class="day-cell">25</button>
+
+            <button type="button" class="day-cell">26</button>
+            <button type="button" class="day-cell">27</button>
+            <button type="button" class="day-cell">28</button>
+            <button type="button" class="day-cell">29</button>
+            <button type="button" class="day-cell">30</button>
+            <button type="button" class="day-cell">31</button>
+            <button type="button" class="day-cell other-month">1</button>
+          </div>
+        </div>
+
+        
+        <div class="card-box slots-box">
+          <div class="slots-header">
+            <h2 class="box-title">Доступное время</h2>
+            <p class="slots-subtitle">15 октября • Анна Кирова</p>
+          </div>
+
+          <div class="slots-grid">
+            <button type="button" class="time-slot">10:00</button>
+            <button type="button" class="time-slot">11:30</button>
+            <button type="button" class="time-slot booked" disabled>
+              <span>13:00</span>
+              <span class="slot-status">Занято</span>
+            </button>
+            <button type="button" class="time-slot selected">14:00</button>
+            <button type="button" class="time-slot">15:30</button>
+            <button type="button" class="time-slot">17:00</button>
+            <button type="button" class="time-slot full-width">18:30</button>
+          </div>
+        </div>
+
+      </section>
+
+   
+      <section class="booking-summary-bar">
+        <div class="summary-info">
+          <p class="summary-label">ВЫБОР</p>
+          <p class="summary-datetime">15 октября, четверг · 14:00 - 15:30</p>
+          <p class="summary-details">Анна Кирова · Тонирование и блеск · 90 минут · 4500 ₽</p>
+        </div>
+
+        <div class="summary-actions">
+          <button type="button" class="btn btn-secondary">← Назад</button>
+          <button type="button" class="btn btn-primary">Далее →</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col footer-brand">
+          <p class="footer-logo">КОНТУР</p>
+          <p class="footer-desc">
+            Парикмахерская в Ярославле. Женские и мужские стрижки, окрашивание, укладки и профессиональный уход за волосами.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-heading">КОНТАКТЫ</h3>
+          <p class="footer-text">📍 ул. Профсоюзная 20, Ярославль</p>
+          <a href="tel:+74852123456" class="footer-phone">📞 +7 (4852) 12-34-56</a>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-heading">РЕЖИМ РАБОТЫ</h3>
+          <p class="footer-text">Пн–Пт: 9:00 – 21:00</p>
+          <p class="footer-text">Сб–Вс: 10:00 – 19:00</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">© 2026. Все права защищены.</p>
+        <a href="#" class="privacy-link">Политика конфиденциальности</a>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
 </html>
