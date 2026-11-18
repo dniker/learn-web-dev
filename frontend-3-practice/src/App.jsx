@@ -47,13 +47,97 @@
 //
 // Ниже — пустой каркас. Здесь можно начать писать.
 
-function App() {
+import { useState } from 'react';
+import Header from './components/Header';
+import Stepper from './components/Stepper';
+import Calendar from './components/Calendar';
+import TimeSlots from './components/TimeSlots';
+import SummaryBar from './components/SummaryBar';
+import Footer from './components/Footer';
+import { getSlotsForDate } from './utils/date';
+
+export default function App() {
+  const [viewYear, setViewYear] = useState(2026);
+  const [viewMonth, setViewMonth] = useState(9);
+  const [selectedDate, setSelectedDate] = useState({ year: 2026, month: 9, day: 15 });
+  const [selectedTime, setSelectedTime] = useState('14:00');
+
+  const slots = getSlotsForDate(selectedDate);
+
+  function handleSelectDay(day) {
+    setSelectedDate({ year: viewYear, month: viewMonth, day });
+    setSelectedTime(null);
+  }
+
+  function handlePrevMonth() {
+    if (viewMonth === 0) {
+      setViewMonth(11);
+      setViewYear((prev) => prev - 1);
+    } else {
+      setViewMonth((prev) => prev - 1);
+    }
+  }
+
+  function handleNextMonth() {
+    if (viewMonth === 11) {
+      setViewMonth(0);
+      setViewYear((prev) => prev + 1);
+    } else {
+      setViewMonth((prev) => prev + 1);
+    }
+  }
+
   return (
-    <div>
-      {/* Начните отсюда. Например, разметьте .page, добавьте шапку,
-            основную область, подвал. */}
+    <div className="page">
+      <Header />
+      <Stepper />
+
+      <main className="main-content">
+        <div className="container">
+          <section className="booking-top">
+            <div className="booking-heading">
+              <h1 className="page-title">ЗАПИСЬ</h1>
+              <p className="page-subtitle">Выберите дату и время</p>
+            </div>
+
+            <div className="selected-service-card">
+              <div className="service-card-left">
+                <span className="service-checkbox">✓</span>
+                <div className="service-info">
+                  <h2 className="service-name">Тонирование и блеск</h2>
+                  <p className="service-duration">Длительность: 90 мин</p>
+                </div>
+              </div>
+              <span className="service-price">4 500 ₽</span>
+            </div>
+          </section>
+
+          <section className="booking-grid">
+            <Calendar
+              viewYear={viewYear}
+              viewMonth={viewMonth}
+              selectedDate={selectedDate}
+              onSelectDay={handleSelectDay}
+              onPrevMonth={handlePrevMonth}
+              onNextMonth={handleNextMonth}
+            />
+
+            <TimeSlots
+              selectedDate={selectedDate}
+              slots={slots}
+              selectedTime={selectedTime}
+              onSelectTime={setSelectedTime}
+            />
+          </section>
+
+          <SummaryBar
+            selectedDate={selectedDate}
+            selectedTime={selectedTime}
+          />
+        </div>
+      </main>
+
+      <Footer />
     </div>
   );
 }
-
-export default App;
